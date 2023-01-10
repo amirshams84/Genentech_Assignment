@@ -22,7 +22,7 @@ task build_seurat_object {
     set +eu && PS1=dummy && . /opt/conda/etc/profile.d/conda.sh;
     conda activate Seurat_conda
     
-    Rscript /script/Genentech_Assignment/R_script/build_seurat_object.R ${h5_file} /result ${prefix}
+    Rscript /script/Genentech_Assignment/R_script/build_seurat_object.R ${h5_file} /result/ ${prefix}
   >>>
   output {
     File Seurat_Object  = "/result/${prefix}_Seurat_Object.rds"
@@ -38,7 +38,7 @@ task QC_trimming_normalize {
   command <<<
     set +eu && PS1=dummy && . /opt/conda/etc/profile.d/conda.sh;
     conda activate Seurat_conda
-    Rscript /script/Genentech_Assignment/R_script/QC_trimming_normalize.R ${Seurat_object} /result ${prefix}
+    Rscript /script/Genentech_Assignment/R_script/QC_trimming_normalize.R ${Seurat_object} /result/ ${prefix}
   >>>
   output {
     File Seurat_object_processed  = "/result/${prefix}_Seurat_Object_processed.rds"
@@ -54,7 +54,7 @@ task PCA_UMAP {
   command <<<
     set +eu && PS1=dummy && . /opt/conda/etc/profile.d/conda.sh;
     conda activate Seurat_conda
-    Rscript /script/Genentech_Assignment/R_script/PCA_UMAP.R ${Seurat_object_processed} /result ${prefix}
+    Rscript /script/Genentech_Assignment/R_script/PCA_UMAP.R ${Seurat_object_processed} /result/ ${prefix}
   >>>
   output {
     File Seurat_object_processed_UMAP  = "/result/${prefix}_Seurat_Object_processed_UMAP.rds"
@@ -70,7 +70,7 @@ task cluster_biomarker {
   command <<<
     set +eu && PS1=dummy && . /opt/conda/etc/profile.d/conda.sh;
     conda activate Seurat_conda
-    Rscript /script/Genentech_Assignment/R_script/cluster_biomarker.R ${Seurat_object_processed_UMAP} /result ${prefix}
+    Rscript /script/Genentech_Assignment/R_script/cluster_biomarker.R ${Seurat_object_processed_UMAP} /result/ ${prefix}
   >>>
   output {
     File Seurat_object_processed_UMAP_cluster = "/result/${prefix}_Seurat_Object_cluster_biomarkers_dotplot.png"
