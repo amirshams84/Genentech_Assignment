@@ -59,7 +59,7 @@ dev.off()
 # the trimming
 # ------------------------
 
-Seurat_Object <- subset(Seurat_Object, subset = nFeature_RNA > 200 & nFeature_RNA < 2500 & percent_mito < 5)
+Seurat_Object <- subset(Seurat_Object, subset = nFeature_RNA > 100 & nFeature_RNA < 6000 & percent_mito < 10)
 
 # ++++++++++++++++++++++++
 # after trimming
@@ -75,6 +75,7 @@ png(
     )
 
     VlnPlot(Seurat_Object, group.by= "orig.ident", features = feats, pt.size =0, ncol = 4) + NoLegend()
+    
 dev.off()
 
 
@@ -88,7 +89,6 @@ Seurat_Object <- NormalizeData(
     scale.factor = 10000
     )
 
-Seurat_Object <- ScaleData(Seurat_Object, verbose = FALSE)
 
 
 suppressWarnings(
@@ -114,8 +114,8 @@ dev.off()
 
 
 
-all.genes <- rownames(Seurat_Object)
-Seurat_Object <- ScaleData(Seurat_Object, features = all.genes, vars.to.regress = "percent_mito")
+#all.genes <- rownames(Seurat_Object)
+Seurat_Object <- ScaleData(Seurat_Object)
 
 # ++++++++++++++++++++++++
 # Save RDS object
