@@ -26,7 +26,7 @@ This is the workflow which provide a WDL pipeline for single cell downstream ana
 
 
 ## Caveat
- *- not throughly tested 
- *- customized for screening only
+ - not throughly tested 
+ - customized for screening only
 
 
