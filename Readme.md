@@ -25,3 +25,8 @@ This is the workflow which provide a WDL pipeline for single cell downstream ana
   - *.png figures generated through pipeline process
 
 
+## Caveat
+ *- not throughly tested 
+ *- customized for screening only
+
+
