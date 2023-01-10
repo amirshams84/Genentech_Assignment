@@ -16,7 +16,7 @@ workflow pipeline {
 
 task build_seurat_object {
   File h5_file
-  String prefix = sub(h5_file, ".h5", "")
+  String prefix = sub(basename(h5_file), ".h5", "")
 
   command <<<
     set +eu && PS1=dummy && . /opt/conda/etc/profile.d/conda.sh;
@@ -33,7 +33,7 @@ task build_seurat_object {
 
 task QC_trimming_normalize {
   File Seurat_object
-  String prefix = sub(Seurat_object, "_Seurat_Object.rds", "") 
+  String prefix = sub(basename(Seurat_object), "_Seurat_Object.rds", "") 
 
   command <<<
     set +eu && PS1=dummy && . /opt/conda/etc/profile.d/conda.sh;
@@ -49,7 +49,7 @@ task QC_trimming_normalize {
 
 task PCA_UMAP {
   File Seurat_object_processed
-  String prefix = sub(Seurat_object_processed, "_Seurat_Object_processed.rds", "")  
+  String prefix = sub(basename(Seurat_object_processed), "_Seurat_Object_processed.rds", "")  
 
   command <<<
     set +eu && PS1=dummy && . /opt/conda/etc/profile.d/conda.sh;
@@ -65,7 +65,7 @@ task PCA_UMAP {
 
 task cluster_biomarker {
   File Seurat_object_processed_UMAP
-  String prefix = sub(Seurat_object_processed_UMAP, "_Seurat_Object_processed_UMAP.rds", "") 
+  String prefix = sub(basename(Seurat_object_processed_UMAP), "_Seurat_Object_processed_UMAP.rds", "") 
 
   command <<<
     set +eu && PS1=dummy && . /opt/conda/etc/profile.d/conda.sh;
